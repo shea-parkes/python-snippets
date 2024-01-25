@@ -40,3 +40,13 @@ def pipe(data, *funcs):
         data = func(data)
     return data
 ```
+
+If you do happen to have [pytoolz](https://github.com/pytoolz/toolz) (or even [cytoolz](https://github.com/pytoolz/cytoolz) for extra speed) available, then here is the import style I most identify with:
+```python
+import toolz.curried as z
+import toolz.curried.operator as zop
+
+# Or if speed is really important, and you bother to install `cytoolz`...
+import cytoolz.curried as z
+import cytoolz.curried.operator as zop
+```
