@@ -27,18 +27,25 @@ The `functools` standard library is nice.  But I really enjoy when I get to brin
 ```python
 # From: https://en.wikipedia.org/wiki/Tacit_programming
 from functools import partial, reduce
-def compose(*fns):
+def compose(*funcs):
     """compose(f, g, h)(x) == h(g(f(x)))"""
-    return partial(reduce, lambda v, fn: fn(v), fns)
+    return partial(reduce, lambda val, func: func(val), funcs)
 ```
 
 ```python
 # From: https://github.com/pytoolz/toolz
-def pipe(data, *funcs):
+def pipe(val, *funcs):
     """pipe(x, f, g, h) == h(g(f(x)))"""
     for func in funcs:
-        data = func(data)
-    return data
+        val = func(val)
+    return val
+```
+
+```python
+# From: https://github.com/pytoolz/toolz
+def juxt(*funcs):
+    """juxt(f, g, h)(x) = (f(x), g(x), h(x))"""
+    return lambda val: tuple(func(val) for func in funcs)
 ```
 
 If you do happen to have [pytoolz](https://github.com/pytoolz/toolz) (or even [cytoolz](https://github.com/pytoolz/cytoolz) for extra speed) available, then here is the import style I most identify with:
