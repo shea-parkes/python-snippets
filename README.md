@@ -57,3 +57,13 @@ import toolz.curried.operator as zop
 import cytoolz.curried as z
 import cytoolz.curried.operator as zop
 ```
+
+## CI Nonsense
+
+Here's a reasonable python snippet to create a useful cache key:
+```python
+import hashlib, os, sys
+version_hash = hashlib.sha256(sys.version.encode() + sys.executable.encode()).hexdigest()
+with open(os.environ["GITHUB_OUTPUT"], mode="a") as fh_out:
+    fh_out.write(f"pyver={version_hash}")
+```
